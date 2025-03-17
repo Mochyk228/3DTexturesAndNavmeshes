@@ -24,10 +24,12 @@ func _input(event):
 func _physics_process(_delta):
 	var direction = Vector3()
 	
-	if nav.get_final_position() - global_position < Vector3(0.2, 0, 0.2):
-		nav.target_position = Global.target.global_position
-		direction = nav.get_next_path_position() - global_position
-		direction = direction.normalized()
-		velocity = direction * SPEED
+	nav.target_position = Global.target.global_position
+	direction = nav.get_next_path_position() - global_position
+	direction = direction.normalized()
+	if nav.get_final_position() == global_position:
+		direction = Vector3.ZERO
+	velocity = direction * SPEED
+		
 		
 	move_and_slide()
