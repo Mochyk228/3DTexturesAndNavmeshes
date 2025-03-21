@@ -896,3 +896,16 @@ shape = SubResource("BoxShape3D_i04dx")
 
 [node name="Target" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 111.132, 0, 112.273)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CanvasModulate" type="CanvasModulate" parent="Control"]
+modulate = Color(0.0865333, 0.496607, 0.46809, 1)
+self_modulate = Color(0.228274, 0.463951, 0.311908, 1)
+color = Color(0.213424, 0.581513, 0.594889, 1)
