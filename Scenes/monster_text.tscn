@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://dx4rfppdhoxq5"]
+
+[sub_resource type="Gradient" id="Gradient_dun2r"]
+offsets = PackedFloat32Array(0.988722)
+colors = PackedColorArray(0.494526, 0.114712, 0.2345, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_r3lo5"]
+gradient = SubResource("Gradient_dun2r")
+width = 1
+
+[node name="Monster" type="TextureRect"]
+offset_left = 183.0
+offset_top = 110.0
+offset_right = 200.0
+offset_bottom = 128.0
+texture = SubResource("GradientTexture1D_r3lo5")

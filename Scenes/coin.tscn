@@ -1,0 +1,100 @@
+[gd_scene load_steps=7 format=3 uid="uid://c2ags8ib2824q"]
+
+[ext_resource type="Script" uid="uid://cpym33xe7x5oc" path="res://Scripts/coin.gd" id="1_jgi06"]
+[ext_resource type="PackedScene" uid="uid://d3evcwu53em26" path="res://Models/coin.blend" id="2_g537i"]
+
+[sub_resource type="Animation" id="Animation_dun2r"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ckhy6"]
+resource_name = "move"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 6.28319, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, -1.62049, 0), Vector3(0, 1.78505, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_r3lo5"]
+_data = {
+&"RESET": SubResource("Animation_dun2r"),
+&"move": SubResource("Animation_ckhy6")
+}
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4g5cr"]
+size = Vector3(5.76758, 8.27441, 6.13184)
+
+[node name="Coin" type="Area3D"]
+script = ExtResource("1_jgi06")
+
+[node name="coin" parent="." instance=ExtResource("2_g537i")]
+transform = Transform3D(2.38531, 0, 0, 0, 2.38531, 0, 0, 0, 2.38531, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="coin"]
+libraries = {
+&"": SubResource("AnimationLibrary_r3lo5")
+}
+autoplay = "move"
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0164261, -0.177542, 1.4229)
+light_color = Color(0.19958, 0.476694, 0.612671, 1)
+light_energy = 5.5
+light_specular = 1.529
+omni_range = 3.819
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0164261, -0.177542, -1.09167)
+light_color = Color(0.19958, 0.476694, 0.612671, 1)
+light_energy = 5.5
+light_specular = 1.529
+omni_range = 3.819
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_4g5cr")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

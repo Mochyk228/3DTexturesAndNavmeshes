@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://crb1u2iv05sxq"]
+
+[sub_resource type="Gradient" id="Gradient_4g5cr"]
+offsets = PackedFloat32Array(0.988722)
+colors = PackedColorArray(0.848899, 0.580543, 0.208201, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ckhy6"]
+gradient = SubResource("Gradient_4g5cr")
+width = 1
+
+[node name="Coin" type="TextureRect" groups=["Coin"]]
+offset_left = 132.0
+offset_top = 105.0
+offset_right = 149.0
+offset_bottom = 123.0
+scale = Vector2(0.5, 0.5)
+texture = SubResource("GradientTexture1D_ckhy6")

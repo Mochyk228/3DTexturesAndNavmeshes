@@ -1,0 +1,70 @@
+[gd_scene load_steps=8 format=3 uid="uid://dnexah6bb5pxp"]
+
+[ext_resource type="Script" uid="uid://cqfjkk012pxrk" path="res://Scripts/character_body_3d.gd" id="1_6t5aa"]
+[ext_resource type="PackedScene" uid="uid://bwmykg4uxoy2f" path="res://Models/humanoid.glb" id="2_vgqql"]
+[ext_resource type="AnimationLibrary" uid="uid://ssehm5m4dy64" path="res://Models/Swimming.fbx" id="3_fkybt"]
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vnucn"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8pvmw"]
+radius = 1.84421
+height = 10.6632
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vnucn"]
+transparency = 1
+albedo_color = Color(0.178798, 0.509566, 0.662102, 0.607843)
+
+[sub_resource type="SphereMesh" id="SphereMesh_vnucn"]
+material = SubResource("StandardMaterial3D_vnucn")
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_6t5aa")
+
+[node name="humanoid" parent="." instance=ExtResource("2_vgqql")]
+transform = Transform3D(-1, 8.74228e-08, 3.82137e-15, 0, -4.37114e-08, 1, 8.74228e-08, 1, 4.37114e-08, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="humanoid"]
+libraries = {
+&"": SubResource("AnimationLibrary_vnucn"),
+&"Swimming-2": ExtResource("3_fkybt")
+}
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.21404, 0)
+shape = SubResource("CapsuleShape3D_8pvmw")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.969454, 0.245274, 0, -0.245274, 0.969454, 0, 11.822, 26.059)
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+debug_enabled = true
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.89652, 3.295)
+emitting = false
+amount = 6
+lifetime = 2.61
+mesh = SubResource("SphereMesh_vnucn")
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 4.0
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
+spread = 0.1
+gravity = Vector3(0, 20.9, 0)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(0.0036131, 0.999993, 0.000231326, 0.00828367, -0.000261249, 0.999966, 0.999959, -0.00361106, -0.00828456, 0, 7.96143, 2.99149)
+light_color = Color(0.925832, 0.436077, 0.411149, 1)
+light_energy = 11.26
+light_specular = 4.66
+shadow_enabled = true
+spot_range = 13.9653
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00934601, 26.099, 0.0186424)
+light_color = Color(0.206791, 0.508563, 0.635101, 1)
+light_energy = 4.558
+light_volumetric_fog_energy = 16.0
+omni_range = 4096.0
